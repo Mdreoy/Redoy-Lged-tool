@@ -133,7 +133,7 @@
         }
 
         /* Main Tool Container */
-        .tool-container {
+      /tool-container {
             background-color: white;
             border-radius: var(--radius);
             box-shadow: var(--shadow);
