@@ -1,0 +1,869 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>অ্যাড দেখে ইনকাম - বিজ্ঞাপনভিত্তিক ইনকাম সাইট</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        :root {
+            --primary: #1a2a6c;
+            --secondary: #b21f1f;
+            --accent: #fdbb2d;
+            --light: #f8f9fa;
+            --dark: #343a40;
+            --success: #28a745;
+            --warning: #ffc107;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #f5f7fa, #e4e7eb);
+            color: #333;
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        /* Header Styles */
+        header {
+            background: rgba(255, 255, 255, 0.95);
+            box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+            margin-bottom: 25px;
+            padding: 15px 30px;
+            position: sticky;
+            top: 10px;
+            z-index: 100;
+        }
+        
+        .header-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .logo {
+            font-size: 28px;
+            font-weight: 700;
+            color: var(--primary);
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo i {
+            margin-right: 10px;
+            color: var(--accent);
+        }
+        
+        .logo span {
+            color: var(--secondary);
+        }
+        
+        .user-info {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .user-balance {
+            background: var(--primary);
+            color: white;
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-weight: 600;
+        }
+        
+        .user-balance i {
+            margin-right: 5px;
+        }
+        
+        .user-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: linear-gradient(45deg, var(--primary), var(--secondary));
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+            margin-top: 15px;
+            flex-wrap: wrap;
+        }
+        
+        nav ul li {
+            margin: 5px;
+        }
+        
+        nav ul li a {
+            text-decoration: none;
+            color: var(--dark);
+            font-weight: 500;
+            transition: all 0.3s;
+            padding: 8px 15px;
+            border-radius: 5px;
+            display: flex;
+            align-items: center;
+        }
+        
+        nav ul li a i {
+            margin-right: 8px;
+            font-size: 18px;
+        }
+        
+        nav ul li a:hover, nav ul li a.active {
+            background: var(--primary);
+            color: white;
+        }
+        
+        /* Hero Section */
+        .hero {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 10px;
+            padding: 40px;
+            margin-bottom: 30px;
+            text-align: center;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+            background: linear-gradient(45deg, rgba(26, 42, 108, 0.05), rgba(253, 187, 45, 0.05));
+            border: 1px solid rgba(253, 187, 45, 0.2);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero::before {
+            content: "";
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(253, 187, 45, 0.1) 0%, rgba(255,255,255,0) 70%);
+            z-index: -1;
+        }
+        
+        .hero h1 {
+            font-size: 42px;
+            color: var(--primary);
+            margin-bottom: 20px;
+        }
+        
+        .hero p {
+            font-size: 20px;
+            color: #555;
+            max-width: 800px;
+            margin: 0 auto 30px;
+        }
+        
+        .btn {
+            display: inline-block;
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+            color: white;
+            padding: 15px 35px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 18px;
+            transition: transform 0.3s, box-shadow 0.3s;
+            margin: 10px;
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(178, 31, 31, 0.3);
+        }
+        
+        .btn:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+        
+        .btn-accent {
+            background: linear-gradient(to right, var(--accent), var(--secondary));
+        }
+        
+        /* Dashboard Section */
+        .dashboard {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+        
+        .dashboard-card {
+            background: white;
+            border-radius: 10px;
+            padding: 25px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            border-top: 4px solid var(--primary);
+        }
+        
+        .dashboard-card h2 {
+            color: var(--primary);
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #eee;
+            display: flex;
+            align-items: center;
+        }
+        
+        .dashboard-card h2 i {
+            margin-right: 10px;
+        }
+        
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 15px;
+            margin-top: 20px;
+        }
+        
+        .stat-box {
+            background: var(--light);
+            border-radius: 10px;
+            padding: 20px;
+            text-align: center;
+            transition: transform 0.3s;
+        }
+        
+        .stat-box:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .stat-box i {
+            font-size: 30px;
+            color: var(--primary);
+            margin-bottom: 10px;
+        }
+        
+        .stat-box .number {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--primary);
+        }
+        
+        .stat-box .label {
+            font-size: 16px;
+            color: #555;
+        }
+        
+        /* Ads Section */
+        .ads-section {
+            background: white;
+            border-radius: 10px;
+            padding: 25px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+            margin-bottom: 30px;
+        }
+        
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid var(--accent);
+        }
+        
+        .section-header h2 {
+            color: var(--primary);
+            display: flex;
+            align-items: center;
+        }
+        
+        .section-header h2 i {
+            margin-right: 10px;
+        }
+        
+        .ad-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+        
+        .ad-card {
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            border: 1px solid #eee;
+            transition: transform 0.3s;
+        }
+        
+        .ad-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+        }
+        
+        .ad-header {
+            background: linear-gradient(45deg, var(--primary), var(--secondary));
+            color: white;
+            padding: 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .ad-reward {
+            background: var(--accent);
+            color: var(--dark);
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-weight: 600;
+        }
+        
+        .ad-content {
+            padding: 20px;
+        }
+        
+        .ad-content h3 {
+            color: var(--primary);
+            margin-bottom: 10px;
+        }
+        
+        .ad-content p {
+            color: #666;
+            margin-bottom: 15px;
+            font-size: 14px;
+        }
+        
+        .ad-timer {
+            background: var(--light);
+            padding: 10px;
+            text-align: center;
+            border-radius: 5px;
+            margin: 15px 0;
+            font-weight: 600;
+            color: var(--secondary);
+        }
+        
+        .ad-action {
+            display: flex;
+            justify-content: center;
+        }
+        
+        .ad-action .btn {
+            padding: 10px 25px;
+            font-size: 16px;
+            margin: 0;
+            width: 100%;
+            text-align: center;
+        }
+        
+        /* How it works section */
+        .how-it-works {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 25px;
+            margin: 40px 0;
+        }
+        
+        .step-card {
+            background: white;
+            border-radius: 10px;
+            padding: 30px 20px;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            position: relative;
+            overflow: hidden;
+            border-top: 4px solid var(--accent);
+        }
+        
+        .step-number {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            background: var(--primary);
+            color: white;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+        }
+        
+        .step-card i {
+            font-size: 40px;
+            color: var(--primary);
+            margin-bottom: 15px;
+        }
+        
+        .step-card h3 {
+            color: var(--primary);
+            margin-bottom: 10px;
+        }
+        
+        /* Footer */
+        footer {
+            background: var(--dark);
+            color: white;
+            padding: 40px 0 20px;
+            border-radius: 10px;
+            margin-top: 40px;
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+        }
+        
+        .footer-section h3 {
+            color: var(--accent);
+            margin-bottom: 20px;
+            font-size: 22px;
+        }
+        
+        .footer-section p {
+            margin-bottom: 15px;
+            color: #ddd;
+        }
+        
+        .footer-section a {
+            color: #ddd;
+            text-decoration: none;
+            display: block;
+            margin-bottom: 10px;
+            transition: color 0.3s;
+        }
+        
+        .footer-section a:hover {
+            color: var(--accent);
+        }
+        
+        .contact-info {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 15px;
+            border-radius: 8px;
+            margin-top: 15px;
+            border-left: 3px solid var(--accent);
+        }
+        
+        .contact-info p {
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .contact-info i {
+            margin-right: 10px;
+            width: 20px;
+            text-align: center;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .dashboard {
+                grid-template-columns: 1fr;
+            }
+            
+            .header-top {
+                flex-direction: column;
+                gap: 15px;
+            }
+            
+            .user-info {
+                width: 100%;
+                justify-content: center;
+            }
+            
+            .hero h1 {
+                font-size: 32px;
+            }
+            
+            .hero p {
+                font-size: 18px;
+            }
+        }
+        
+        /* Animation */
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+        
+        .pulse {
+            animation: pulse 2s infinite;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="header-top">
+                <div class="logo">
+                    <i class="fas fa-ad"></i>
+                    অ্যাড <span>ইনকাম</span>
+                </div>
+                <div class="user-info">
+                    <div class="user-balance">
+                        <i class="fas fa-coins"></i> ৳ ১,২৫০
+                    </div>
+                    <div class="user-avatar">
+                        <i class="fas fa-user"></i>
+                    </div>
+                </div>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="#" class="active"><i class="fas fa-home"></i> হোম</a></li>
+                    <li><a href="#"><i class="fas fa-ad"></i> অ্যাড দেখুন</a></li>
+                    <li><a href="#"><i class="fas fa-money-bill-wave"></i> উত্তোলন</a></li>
+                    <li><a href="#"><i class="fas fa-history"></i> ইতিহাস</a></li>
+                    <li><a href="#"><i class="fas fa-user"></i> প্রোফাইল</a></li>
+                    <li><a href="#"><i class="fas fa-question-circle"></i> সাহায্য</a></li>
+                </ul>
+            </nav>
+        </header>
+
+        <section class="hero">
+            <h1>বিজ্ঞাপন দেখে ইনকাম করুন সহজে!</h1>
+            <p>প্রতিদিন মাত্র ১-২ ঘন্টা সময় দিয়ে মাসে ১০,০০০ - ৫০,০০০ টাকা ইনকাম করুন। বিজ্ঞাপন দেখে সহজেই ইনকাম করুন, কোনো বিশেষ দক্ষতার প্রয়োজন নেই।</p>
+            <a href="#" class="btn pulse">এখনই শুরু করুন</a>
+            <a href="#" class="btn btn-accent">আরও জানুন</a>
+        </section>
+
+        <div class="dashboard">
+            <div class="dashboard-card">
+                <h2><i class="fas fa-chart-line"></i> আজকের স্ট্যাটাস</h2>
+                <div class="stats">
+                    <div class="stat-box">
+                        <i class="fas fa-eye"></i>
+                        <div class="number">১২</div>
+                        <div class="label">দেখা অ্যাড</div>
+                    </div>
+                    <div class="stat-box">
+                        <i class="fas fa-coins"></i>
+                        <div class="number">৳ ১৫০</div>
+                        <div class="label">আজকের ইনকাম</div>
+                    </div>
+                    <div class="stat-box">
+                        <i class="fas fa-bolt"></i>
+                        <div class="number">৫</div>
+                        <div class="label">স্ট্রিক</div>
+                    </div>
+                    <div class="stat-box">
+                        <i class="fas fa-trophy"></i>
+                        <div class="number">২</div>
+                        <div class="label">বোনাস</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="dashboard-card">
+                <h2><i class="fas fa-bullseye"></i> লক্ষ্যমাত্রা</h2>
+                <div class="stats">
+                    <div class="stat-box">
+                        <i class="fas fa-calendar-day"></i>
+                        <div class="number">৳ ৫০০</div>
+                        <div class="label">দৈনিক লক্ষ্য</div>
+                    </div>
+                    <div class="stat-box">
+                        <i class="fas fa-calendar-week"></i>
+                        <div class="number">৳ ৩,৫০০</div>
+                        <div class="label">সাপ্তাহিক লক্ষ্য</div>
+                    </div>
+                    <div class="stat-box">
+                        <i class="fas fa-medal"></i>
+                        <div class="number">৭৫%</div>
+                        <div class="label">লক্ষ্য অর্জন</div>
+                    </div>
+                    <div class="stat-box">
+                        <i class="fas fa-gift"></i>
+                        <div class="number">৳ ৫০০</div>
+                        <div class="label">বোনাস ইনকাম</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="ads-section">
+            <div class="section-header">
+                <h2><i class="fas fa-ad"></i> আজকের বিজ্ঞাপন</h2>
+                <div class="available-ads">
+                    <span class="badge">১০টি অ্যাড পাওয়া যাচ্ছে</span>
+                </div>
+            </div>
+            
+            <div class="ad-container">
+                <div class="ad-card">
+                    <div class="ad-header">
+                        <div class="ad-type">ভিডিও অ্যাড</div>
+                        <div class="ad-reward">+ ৳ ১৫</div>
+                    </div>
+                    <div class="ad-content">
+                        <h3>নতুন স্মার্টফোন রিভিউ</h3>
+                        <p>এই ভিডিওটি দেখে নতুন স্মার্টফোনটির ফিচারগুলো জানুন এবং রিভিউ দিন।</p>
+                        <div class="ad-info">
+                            <p><i class="fas fa-clock"></i> সময়: ৩০ সেকেন্ড</p>
+                            <p><i class="fas fa-tag"></i> টেকনোলজি</p>
+                        </div>
+                        <div class="ad-timer">
+                            <i class="fas fa-hourglass-half"></i> ৩০ সেকেন্ড দেখুন
+                        </div>
+                        <div class="ad-action">
+                            <button class="btn">অ্যাড দেখুন</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="ad-card">
+                    <div class="ad-header">
+                        <div class="ad-type">সার্ভে</div>
+                        <div class="ad-reward">+ ৳ ২৫</div>
+                    </div>
+                    <div class="ad-content">
+                        <h3>খাবারের পছন্দ জরিপ</h3>
+                        <p>আপনার পছন্দের খাবার সম্পর্কে আমাদের ৫টি প্রশ্নের উত্তর দিন।</p>
+                        <div class="ad-info">
+                            <p><i class="fas fa-clock"></i> সময়: ২ মিনিট</p>
+                            <p><i class="fas fa-tag"></i> খাদ্য</p>
+                        </div>
+                        <div class="ad-timer">
+                            <i class="fas fa-hourglass-half"></i> ৫টি প্রশ্ন
+                        </div>
+                        <div class="ad-action">
+                            <button class="btn">জরিপে অংশ নিন</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="ad-card">
+                    <div class="ad-header">
+                        <div class="ad-type">অ্যাপ টেস্ট</div>
+                        <div class="ad-reward">+ ৳ ৪০</div>
+                    </div>
+                    <div class="ad-content">
+                        <h3>গেম অ্যাপ টেস্টিং</h3>
+                        <p>নতুন গেম অ্যাপটি ডাউনলোড করে ৫ মিনিট খেলুন এবং রিভিউ দিন।</p>
+                        <div class="ad-info">
+                            <p><i class="fas fa-clock"></i> সময়: ৫ মিনিট</p>
+                            <p><i class="fas fa-tag"></i> গেম</p>
+                        </div>
+                        <div class="ad-timer">
+                            <i class="fas fa-hourglass-half"></i> ৫ মিনিট ব্যয় করুন
+                        </div>
+                        <div class="ad-action">
+                            <button class="btn">ডাউনলোড করুন</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="ads-section">
+            <div class="section-header">
+                <h2><i class="fas fa-crown"></i> বিশেষ অফার</h2>
+                <div class="available-ads">
+                    <span class="badge">সীমিত সময়ের অফার</span>
+                </div>
+            </div>
+            
+            <div class="ad-container">
+                <div class="ad-card">
+                    <div class="ad-header" style="background: linear-gradient(45deg, #ff8c00, #ff4500);">
+                        <div class="ad-type">বোনাস অ্যাড</div>
+                        <div class="ad-reward">+ ৳ ১০০</div>
+                    </div>
+                    <div class="ad-content">
+                        <h3>ব্র্যান্ড স্পেশাল অফার</h3>
+                        <p>এই বিশেষ ভিডিওটি দেখে পণ্যটি সম্পর্কে জানুন এবং একটি সহজ প্রশ্নের উত্তর দিন।</p>
+                        <div class="ad-info">
+                            <p><i class="fas fa-clock"></i> সময়: ৪৫ সেকেন্ড</p>
+                            <p><i class="fas fa-tag"></i> বিশেষ অফার</p>
+                        </div>
+                        <div class="ad-timer">
+                            <i class="fas fa-gem"></i> এক্সক্লুসিভ অফার
+                        </div>
+                        <div class="ad-action">
+                            <button class="btn btn-accent">বোনাস পান</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="ad-card">
+                    <div class="ad-header" style="background: linear-gradient(45deg, #9c27b0, #673ab7);">
+                        <div class="ad-type">রেফার অ্যাড</div>
+                        <div class="ad-reward">+ ৳ ২০০</div>
+                    </div>
+                    <div class="ad-content">
+                        <h3>বন্ধুকে আমন্ত্রণ করুন</h3>
+                        <p>আপনার বন্ধুকে আমন্ত্রণ করুন, যখন সে প্রথম ইনকাম করবে আপনি পাবেন ৳ ২০০ বোনাস।</p>
+                        <div class="ad-info">
+                            <p><i class="fas fa-users"></i> ২ জন বন্ধু</p>
+                            <p><i class="fas fa-tag"></i> রেফারেল</p>
+                        </div>
+                        <div class="ad-timer">
+                            <i class="fas fa-user-plus"></i> রেফার লিংক দিন
+                        </div>
+                        <div class="ad-action">
+                            <button class="btn btn-accent">বোনাস পান</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <h2 style="text-align: center; margin: 40px 0 20px; color: var(--primary);">
+            <i class="fas fa-lightbulb"></i> কিভাবে ইনকাম করবেন?
+        </h2>
+        
+        <div class="how-it-works">
+            <div class="step-card">
+                <div class="step-number">১</div>
+                <i class="fas fa-user-plus"></i>
+                <h3>নিবন্ধন করুন</h3>
+                <p>সাইন আপ করে আপনার অ্যাকাউন্ট তৈরি করুন। সম্পূর্ণ বিনামূল্যে এবং সহজ প্রক্রিয়া।</p>
+            </div>
+            
+            <div class="step-card">
+                <div class="step-number">২</div>
+                <i class="fas fa-ad"></i>
+                <h3>অ্যাড দেখুন</h3>
+                <p>বিভিন্ন ধরনের বিজ্ঞাপন দেখুন - ভিডিও, সার্ভে, অ্যাপ টেস্ট ইত্যাদি।</p>
+            </div>
+            
+            <div class="step-card">
+                <div class="step-number">৩</div>
+                <i class="fas fa-coins"></i>
+                <h3>ইনকাম করুন</h3>
+                <p>প্রতিটি অ্যাড সম্পূর্ণ করার জন্য আপনি নির্দিষ্ট পরিমাণ অর্থ পাবেন।</p>
+            </div>
+            
+            <div class="step-card">
+                <div class="step-number">৪</div>
+                <i class="fas fa-wallet"></i>
+                <h3>টাকা উত্তোলন</h3>
+                <p>আপনার অর্জিত টাকা বিকাশ, নগদ বা ব্যাংকের মাধ্যমে উত্তোলন করুন।</p>
+            </div>
+        </div>
+
+        <footer>
+            <div class="container">
+                <div class="footer-content">
+                    <div class="footer-section">
+                        <h3>অ্যাড ইনকাম</h3>
+                        <p>বিজ্ঞাপন দেখে সহজেই ইনকাম করুন। যেকোনো সময়, যেকোনো স্থান থেকে কাজ করুন এবং নিয়মিত অর্থ উপার্জন করুন।</p>
+                        
+                        <div class="contact-info">
+                            <p><i class="fas fa-envelope"></i> ইমেইল: mdredoy0575@</p>
+                            <p><i class="fas fa-phone"></i> ফোন: +8801789962189</p>
+                        </div>
+                    </div>
+                    
+                    <div class="footer-section">
+                        <h3>গুরুত্বপূর্ণ লিঙ্ক</h3>
+                        <a href="#"><i class="fas fa-link"></i> অ্যাড দেখে ইনকাম করার নিয়ম</a>
+                        <a href="#"><i class="fas fa-link"></i> পেমেন্ট পদ্ধতি</a>
+                        <a href="#"><i class="fas fa-link"></i> প্রশ্নোত্তর</a>
+                        <a href="#"><i class="fas fa-link"></i> ব্যবহারের শর্তাবলী</a>
+                    </div>
+                    
+                    <div class="footer-section">
+                        <h3>পেমেন্ট অপশন</h3>
+                        <a href="#"><i class="fas fa-money-check"></i> বিকাশ</a>
+                        <a href="#"><i class="fas fa-money-check"></i> নগদ</a>
+                        <a href="#"><i class="fas fa-money-check"></i> রকেট</a>
+                        <a href="#"><i class="fas fa-university"></i> ব্যাংক ট্রান্সফার</a>
+                    </div>
+                </div>
+                
+                <div class="footer-bottom">
+                    <p>&copy; ২০২৩ অ্যাড ইনকাম - বিজ্ঞাপনভিত্তিক ইনকাম প্ল্যাটফর্ম। সকল অধিকার সংরক্ষিত।</p>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <script>
+        // Ad view timer simulation
+        document.addEventListener('DOMContentLoaded', function() {
+            const adButtons = document.querySelectorAll('.ad-action .btn');
+            
+            adButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    const card = this.closest('.ad-card');
+                    const timer = card.querySelector('.ad-timer');
+                    const reward = card.querySelector('.ad-reward').textContent;
+                    const rewardAmount = parseInt(reward.match(/\d+/)[0]);
+                    
+                    // Disable button during ad view
+                    this.disabled = true;
+                    this.textContent = 'অপেক্ষা করুন...';
+                    
+                    // Get timer text
+                    let timeText = timer.textContent;
+                    let seconds = 30;
+                    
+                    if(timeText.includes('মিনিট')) {
+                        seconds = 60 * parseInt(timeText.match(/\d+/)[0]);
+                    } else if(timeText.includes('সেকেন্ড')) {
+                        seconds = parseInt(timeText.match(/\d+/)[0]);
+                    } else if(timeText.includes('প্রশ্ন')) {
+                        seconds = 20 * parseInt(timeText.match(/\d+/)[0]);
+                    }
+                    
+                    let remaining = seconds;
+                    
+                    // Update timer during ad view
+                    const countdown = setInterval(() => {
+                        remaining--;
+                        
+                        if(remaining > 0) {
+                            timer.innerHTML = `<i class="fas fa-hourglass-half"></i> ${remaining} সেকেন্ড বাকি`;
+                        } else {
+                            clearInterval(countdown);
+                            timer.innerHTML = `<i class="fas fa-check-circle"></i> সম্পন্ন হয়েছে!`;
+                            this.textContent = 'ইনকাম সংগ্রহ করুন';
+                            this.disabled = false;
+                            this.classList.add('btn-accent');
+                            
+                            // Add reward to balance
+                            const balanceEl = document.querySelector('.user-balance');
+                            const currentBalance = parseInt(balanceEl.textContent.match(/\d+/)[0]);
+                            const newBalance = currentBalance + rewardAmount;
+                            balanceEl.innerHTML = `<i class="fas fa-coins"></i> ৳ ${newBalance.toLocaleString('bn-BD')}`;
+                            
+                            // Update today's stats
+                            const adsViewedEl = document.querySelectorAll('.stat-box .number')[0];
+                            const earningsTodayEl = document.querySelectorAll('.stat-box .number')[1];
+                            
+                            adsViewedEl.textContent = parseInt(adsViewedEl.textContent) + 1;
+                            earningsTodayEl.textContent = `৳ ${parseInt(earningsTodayEl.textContent.match(/\d+/)[0]) + rewardAmount}`;
+                        }
+                    }, 1000);
+                });
+            });
+            
+            // Pulse animation for bonus button
+            const bonusBtn = document.querySelector('.pulse');
+            setInterval(() => {
+                bonusBtn.classList.toggle('pulse');
+                setTimeout(() => bonusBtn.classList.toggle('pulse'), 100);
+            }, 4000);
+        });
+    </script>
+</body>
+</html>
